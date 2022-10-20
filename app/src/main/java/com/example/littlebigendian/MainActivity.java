@@ -37,19 +37,19 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Vector> vectors = new ArrayList<Vector>();
 
     void startCalculation() {
-
+        Library library = new Library();
         for (int i = 0; i < vectors.size(); i++) {
             System.out.println(String.format("--------> ================ %d vector test ================", i));
-            String hexToLittleEndianResult = hexToLittleEndian(vectors.get(i));
+            String hexToLittleEndianResult = library.hexToLittleEndian(vectors.get(i));
             System.out.println("--------> hexToLittleEndian " + hexToLittleEndianResult);
 
-            String hexToBigEndianResult = hexToBigEndian(vectors.get(i));
+            String hexToBigEndianResult = library.hexToBigEndian(vectors.get(i));
             System.out.println("--------> hexToBigEndianResult " + hexToBigEndianResult);
 
-            String littleEndianToHexResult = littleEndianToHex(vectors.get(i));
+            String littleEndianToHexResult = library.littleEndianToHex(vectors.get(i));
             System.out.println("--------> littleEndianToHexResult " + littleEndianToHexResult);
 
-            String bigEndianToHexResult = bigEndianToHex(vectors.get(i));
+            String bigEndianToHexResult = library.bigEndianToHex(vectors.get(i));
             System.out.println("--------> bigEndianToHexResult " + bigEndianToHexResult);
         }
 
@@ -84,49 +84,6 @@ public class MainActivity extends AppCompatActivity {
         fourthVector.hexValue = "F000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
         vectors.add(fourthVector);
     }
-
-    String hexToLittleEndian(Vector inputVector) {
-        long ret = 0;
-        String hexLittleEndian = "";
-        if (inputVector.hexValue.length() % 2 == 0) {
-            for (int i = inputVector.hexValue.length() - 2; i >= 0; i -= 2) {
-                hexLittleEndian += inputVector.hexValue.substring(i, i + 2);
-            }
-            try {
-                ret = Long.parseLong(hexLittleEndian, 16);
-            } catch (Exception ex ){
-                System.out.println("---> parseLong ex: " + ex.toString());
-            }
-        }
-
-        return String.format("%d", ret);
-    }
-
-    String hexToBigEndian(Vector inputVector) {
-        long ret = 0;
-        if (inputVector.hexValue.length() % 2 == 0) {
-            try {
-                ret = Long.parseLong(inputVector.hexValue, 16);
-            } catch (Exception ex ){
-                System.out.println("---> parseLong ex: " + ex.toString());
-            }
-        }
-
-        return String.format("%d", ret);
-    }
-
-    String littleEndianToHex(Vector inputVector) {
-
-        BigInteger big = new BigInteger(inputVector.littleEndian);
-        return big.toString(16);
-    }
-
-    String bigEndianToHex(Vector inputVector ) {
-        BigInteger big = new BigInteger(inputVector.bigEndian);
-        String result = big.toString(16);
-        return result;
-    }
-
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
