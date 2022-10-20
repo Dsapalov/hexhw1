@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         Vector firstVector = new Vector();
         firstVector.bigEndian = "115339776388732929035197660848497720713218148788040405586178452820382218977280";
         firstVector.littleEndian = "255";
-        firstVector.hexValue = "0xff00000000000000000000000000000000000000000000000000000000000000";
+        firstVector.hexValue = "ff00000000000000000000000000000000000000000000000000000000000000";
         firstVector.numberOfBytes = 32;
         vectors.add(firstVector);
 
